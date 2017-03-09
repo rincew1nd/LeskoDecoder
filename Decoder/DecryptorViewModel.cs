@@ -4,15 +4,31 @@ using System.Runtime.CompilerServices;
 
 namespace Decoder
 {
-    public class DecryptorViewModel
+    public class DecryptorViewModel : INotifyPropertyChanged
     {
-        public List<Alphabet> Alphabet { get; set; }
+        private List<Alphabet> _alphabets;
+        public List<Alphabet> Alphabet
+        {
+            get { return _alphabets; }
+            set
+            {
+                _alphabets = value;
+                OnPropertyChanged();
+            }
+        }
 
         public DecryptorViewModel()
         {
             Alphabet = new List<Alphabet>();
             for (int i = 'А'; i <= 'Я'; i++)
                 Alphabet.Add(new Alphabet((char)i, (char)i));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

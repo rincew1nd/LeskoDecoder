@@ -13,7 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
-            <RowDefinition MaxHeight="40"/>
+            <RowDefinition MaxHeight="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -31,16 +31,22 @@
                   Name="AlphabetTable"
                   ItemsSource="{Binding Alphabet}"
                   AutoGenerateColumns="False"
-                  FontSize="15">
+                  FontSize="15"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserSortColumns="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeColumns="False"
+                  CanUserResizeRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="80" Header="Encrypted" Binding="{Binding Encrypted,Mode=OneWay}"/>
-                <DataGridTextColumn Width="80" Header="Decrypted" Binding="{Binding Decrypted,Mode=TwoWay}"/>
+                <DataGridTextColumn Width="1*" Header="Encrypted" Binding="{Binding Encrypted,Mode=OneWay}"/>
+                <DataGridTextColumn Width="1*" Header="Decrypted" Binding="{Binding Decrypted,Mode=TwoWay}"/>
             </DataGrid.Columns>
         </DataGrid>
-        
+
         <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Расшифровать" FontSize="16" Click="Decrypt_Click"/>
         <Button Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Content="Открыть файл" FontSize="16" Click="OpenFile_Click"/>
-        <Button Grid.Row="2" Grid.Column="4" Content="Сохранить словарь" FontSize="16" Click="SaveAlphabet_Click"/>
-        <Button Grid.Row="2" Grid.Column="5" Content="Загрузить словарь" FontSize="16" Click="LoadAlphabet_Click"/>
+        <Button Grid.Row="2" Grid.Column="4" Content="Сохранить&#xa;словарь" FontSize="16" Click="SaveAlphabet_Click"/>
+        <Button Grid.Row="2" Grid.Column="5" Content="Загрузить&#xa;словарь" FontSize="16" Click="LoadAlphabet_Click"/>
     </Grid>
 </Window>
