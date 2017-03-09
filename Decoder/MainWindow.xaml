@@ -3,44 +3,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:decoder="clr-namespace:Decoder"
+        xmlns:local="clr-namespace:Decoder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="Decoder" Height="600" Width="800" ResizeMode="NoResize">
     <Window.DataContext>
-        <decoder:DecryptorViewModel/>
+      <local:DecryptorViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
             <RowDefinition MaxHeight="40"/>
-            <RowDefinition MaxHeight="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition MaxWidth="175"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="0.7*"/>
         </Grid.ColumnDefinitions>
 
-        <RichTextBox Grid.Row="0" Grid.Column="0" Name="DecryptedText" FontSize="14"/>
-        <RichTextBox Grid.Row="1" Grid.Column="0" Name="EncryptedText" FontSize="14"/>
+        <RichTextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Name="DecryptedText" FontSize="14"/>
+        <RichTextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Name="EncryptedText" FontSize="14"/>
 
-        <DataGrid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
-                  AutoGenerateColumns="False"
+        <DataGrid Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                  Name="AlphabetTable"
                   ItemsSource="{Binding Alphabet}"
-                  Name="AlphabetTable">
-            <DataGrid.DataContext>
-                <decoder:DecryptorViewModel/>
-            </DataGrid.DataContext>
-            <DataGrid.Columns >
-                <DataGridTextColumn MinWidth="75" Header="Encrypted" Binding="{Binding Encrypted}"/>
-                <DataGridTextColumn MinWidth="75" Header="Decrypted" Binding="{Binding Decrypted, Mode=TwoWay}" />
+                  AutoGenerateColumns="False"
+                  FontSize="15">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="80" Header="Encrypted" Binding="{Binding Encrypted,Mode=OneWay}"/>
+                <DataGridTextColumn Width="80" Header="Decrypted" Binding="{Binding Decrypted,Mode=TwoWay}"/>
             </DataGrid.Columns>
         </DataGrid>
-
-        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Alphabet[0].Encrypted}"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Alphabet[0].Decrypted, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
         
-        <Button Grid.Row="3" Grid.Column="0" Content="Разшифровать" FontSize="16" Click="Decrypt_Click"/>
-        <Button Grid.Row="3" Grid.Column="1" Content="Открыть файл" FontSize="16" Click="OpenFile_Click"/>
+        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Расшифровать" FontSize="16" Click="Decrypt_Click"/>
+        <Button Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Content="Открыть файл" FontSize="16" Click="OpenFile_Click"/>
+        <Button Grid.Row="2" Grid.Column="4" Content="Сохранить словарь" FontSize="16" Click="SaveAlphabet_Click"/>
+        <Button Grid.Row="2" Grid.Column="5" Content="Загрузить словарь" FontSize="16" Click="LoadAlphabet_Click"/>
     </Grid>
 </Window>
